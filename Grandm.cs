@@ -1,43 +1,56 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Grandm : MonoBehaviour {
-	GameObject mast;
-	GameObject[] clonelist;
+	public GameObject mast;
+	public GameObject[] clonelist;
 	public float times = 0;
-	List<int[]> a = new List<int[]>(); //gene store
-	int[] firstp; //first gene
-	int pgeneration;
-	int i;
+	public List<int[]> a; //gene store
+	public int[] firstp; //first gene
+	public int pgeneration;
+	public int i;
+	public int j;
 	float rannge;
 	// Use this for initialization
 	void Start () {
+		a = new List<int[]>();
+		clonelist = new GameObject[100];
 		mast = GameObject.Find ("master");
 		i = 0;
-		while(i < 960)
+		j = 0;
+		while(j < 100)
 		{
-			rannge = Random.Range (0.0f , 1.0f);//make random gene
-			if (rannge < 0.5) {
-				firstp [i] = 1;
-			} else {
-				firstp [i] = 0;
-			}
-			i++;
-		}// first gene
-		i = 0;
+			firstp = new int[960];
+			while (i < 960) {
+				rannge = Random.Range (0.0f, 1.0f);//make random gene
+				if (rannge < 0.5) {
+					firstp [i] = 1;
+				} else {
+					firstp [i] = 0;
+				}
+				i++;
+			}// first gene
+			i = 0;
+
+			a.Add (firstp);
+			//Debug.Log(a[j][i]); ok.
+			j++;
+		}
+
+
+
 		while(i < 100)
 		{
 			clonelist [i] = (GameObject)Instantiate (mast); // initialize objects
 			clonelist[i].transform.position = new Vector3(6, 0, 10 + 10*i); //''position
 			clonelist [i].GetComponent<Master> ().thislong = clonelist[i]; //post object
-			clonelist [i].GetComponent<Master> ().move = firstp; //initialize gene
-
+			clonelist [i].GetComponent<Master> ().move = a[i]; //initialize gene
+			//Debug.Log(clonelist [i].GetComponent<Master> ().move[0]);
 			i++;
 		}
 			
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		i = 0;

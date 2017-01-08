@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Master : MonoBehaviour {
-	public int[] move;
+	public int[] move = new int[960];
 	public GameObject c1;
 	public GameObject c2;
 	public GameObject c3;
@@ -22,7 +22,7 @@ public class Master : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		int i = 0;
-		move = new int[960];
+
 		while(i < 960)
 		{
 			//Debug.Log("asdf ==== "+move [i]);

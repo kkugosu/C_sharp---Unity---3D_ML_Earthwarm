@@ -16,18 +16,28 @@ public class Master : MonoBehaviour {
 	public Rigidbody r4;
 	public Rigidbody r5;
 	public GameObject tempobj5;
-	public float temp5;
+	public float temp5x;
+	public float temp5y;
 	public GameObject tempobj4;
-	public float temp4;
+	public float temp4x;
+	public float temp4y;
+	public GameObject tempobj3_1;
+	public float temp3_1x;
+	public float temp3_1y;
+	public GameObject tempobj3_2;
+	public float temp3_2x;
+	public float temp3_2y;
 	public GameObject tempobj2;
-	public float temp2;
+	public float temp2x;
+	public float temp2y;
 	public GameObject tempobj1;
-	public float temp1;
+	public float temp1x;
+	public float temp1y;
 	public float times;
 	public int generation;
 	public int pos;
 	public int torque;
-	public float c5x;
+
 	// Use this for initialization
 	void Start () {
 		int i = 0;
@@ -43,10 +53,12 @@ public class Master : MonoBehaviour {
 		c3 = thislong.transform.Find ("Cylinder3").gameObject;
 		c4 = thislong.transform.Find ("Cylinder4").gameObject;
 		c5 = thislong.transform.Find ("Cylinder5").gameObject; //get object and find child
-		tempobj5 = c5.transform.Find("Cube").gameObject;
-		tempobj4 = c4.transform.Find("Cube").gameObject;
-		tempobj2 = c2.transform.Find("Cube").gameObject;
-		tempobj1 = c1.transform.Find("Cube").gameObject;
+		tempobj5 = c5.transform.Find("fCube").gameObject;
+		tempobj4 = c4.transform.Find("fCube").gameObject;
+		tempobj3_1 = c3.transform.Find("fCube").gameObject;
+		tempobj3_2 = c3.transform.Find("bCube").gameObject;
+		tempobj2 = c2.transform.Find("bCube").gameObject;
+		tempobj1 = c1.transform.Find("bCube").gameObject;
 		r1 = c1.GetComponent<Rigidbody>();
 		r2 = c2.GetComponent<Rigidbody>();
 		r3 = c3.GetComponent<Rigidbody>();
@@ -65,12 +77,53 @@ public class Master : MonoBehaviour {
 			times = 0;
 			pos = 0;
 			generation++;
-			c5x = c5.GetComponent<Transform> ().position.x;
-			temp5 = tempobj5.GetComponent<Transform> ().position.x;
-		
+
 		}
 		if (generation == 1) {
-		
+
+			temp5x = tempobj5.GetComponent<Transform> ().position.x - c5.GetComponent<Transform> ().position.x;
+			temp4x = tempobj4.GetComponent<Transform> ().position.x- c4.GetComponent<Transform> ().position.x;
+			temp3_1x = tempobj3_1.GetComponent<Transform> ().position.x- c3.GetComponent<Transform> ().position.x;
+			temp3_2x = tempobj3_2.GetComponent<Transform> ().position.x - c3.GetComponent<Transform> ().position.x;
+			temp2x = tempobj2.GetComponent<Transform> ().position.x- c2.GetComponent<Transform> ().position.x;
+			temp1x = tempobj1.GetComponent<Transform> ().position.x - c1.GetComponent<Transform> ().position.x;
+
+			temp5y = tempobj5.GetComponent<Transform> ().position.z- c5.GetComponent<Transform> ().position.z;
+			temp4y = tempobj4.GetComponent<Transform> ().position.z- c4.GetComponent<Transform> ().position.z;
+			temp3_1y = tempobj3_1.GetComponent<Transform> ().position.z- c3.GetComponent<Transform> ().position.z;
+			temp3_2y = tempobj3_2.GetComponent<Transform> ().position.z- c3.GetComponent<Transform> ().position.z;
+			temp2y = tempobj2.GetComponent<Transform> ().position.z- c2.GetComponent<Transform> ().position.z;
+			temp1y = tempobj1.GetComponent<Transform> ().position.z- c1.GetComponent<Transform> ().position.z; //get vector
+
+			if ((temp5x * temp4y - temp4x * temp5y) > 0) {
+				r5.AddTorque (300 * Vector3.down);
+				r4.AddTorque (300 * Vector3.up);
+			} else {
+				r4.AddTorque (300 * Vector3.down);
+				r5.AddTorque (300 * Vector3.up);
+			}
+			if ((temp4x * temp3_1y - temp3_1x * temp4y) > 0) {
+				r4.AddTorque (300 * Vector3.down);
+				r3.AddTorque (300 * Vector3.up);
+			} else {
+				r3.AddTorque (300 * Vector3.down);
+				r4.AddTorque (300 * Vector3.up);
+			}
+			if ((temp1x * temp2y - temp2x * temp1y) > 0) {
+				r1.AddTorque (300 * Vector3.down);
+				r2.AddTorque (300 * Vector3.up);
+			} else {
+				r2.AddTorque (300 * Vector3.down);
+				r1.AddTorque (300 * Vector3.up);
+			}
+			if ((temp2x * temp3_2y - temp3_2x * temp2y) > 0) {
+				r2.AddTorque (300 * Vector3.down);
+				r3.AddTorque (300 * Vector3.up);
+			} else {
+				r3.AddTorque (300 * Vector3.down);
+				r2.AddTorque (300 * Vector3.up);
+			} //fix pos
+
 		}
 		if (generation == 0) {
 

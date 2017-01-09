@@ -37,7 +37,8 @@ public class Master : MonoBehaviour {
 	public int generation;
 	public int pos;
 	public int torque;
-
+	public float finalvalue;
+	public int goode;
 	// Use this for initialization
 	void Start () {
 		int i = 0;
@@ -67,6 +68,7 @@ public class Master : MonoBehaviour {
 		pos = 0;
 		generation = 0;
 		torque = 300;
+		goode = 0;
 	}
 	
 	// Update is called once per frame
@@ -102,6 +104,7 @@ public class Master : MonoBehaviour {
 				r4.AddTorque (300 * Vector3.down);
 				r5.AddTorque (300 * Vector3.up);
 			}
+
 			if ((temp4x * temp3_1y - temp3_1x * temp4y) > 0) {
 				r4.AddTorque (300 * Vector3.down);
 				r3.AddTorque (300 * Vector3.up);
@@ -109,6 +112,7 @@ public class Master : MonoBehaviour {
 				r3.AddTorque (300 * Vector3.down);
 				r4.AddTorque (300 * Vector3.up);
 			}
+
 			if ((temp1x * temp2y - temp2x * temp1y) > 0) {
 				r1.AddTorque (300 * Vector3.down);
 				r2.AddTorque (300 * Vector3.up);
@@ -116,6 +120,7 @@ public class Master : MonoBehaviour {
 				r2.AddTorque (300 * Vector3.down);
 				r1.AddTorque (300 * Vector3.up);
 			}
+
 			if ((temp2x * temp3_2y - temp3_2x * temp2y) > 0) {
 				r2.AddTorque (300 * Vector3.down);
 				r3.AddTorque (300 * Vector3.up);
@@ -123,7 +128,11 @@ public class Master : MonoBehaviour {
 				r3.AddTorque (300 * Vector3.down);
 				r2.AddTorque (300 * Vector3.up);
 			} //fix pos
-
+			finalvalue = tempobj5.GetComponent<Transform>().position.x - 6;
+			if (finalvalue > 1)
+			{
+				goode = 1;
+			}
 		}
 		if (generation == 0) {
 

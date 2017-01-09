@@ -6,6 +6,7 @@ public class Grandm : MonoBehaviour {
 	public GameObject[] clonelist;
 	public float times = 0;
 	public List<int[]> a; //gene store
+	public float[] valuelist;
 	public int[] firstp; //first gene
 	public int pgeneration;
 	public int i;
@@ -14,6 +15,12 @@ public class Grandm : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		a = new List<int[]>();
+		valuelist = new float[100];
+		i = 0;
+		while (i < 100) {
+			valuelist [i] = -1;
+			i++;
+		}
 		clonelist = new GameObject[100];
 		mast = GameObject.Find ("master");
 		i = 0;
@@ -39,7 +46,7 @@ public class Grandm : MonoBehaviour {
 		while(i < 100)
 		{
 			clonelist [i] = (GameObject)Instantiate (mast); // initialize objects
-			clonelist[i].transform.position = new Vector3(6, 0, 10 + 10*i); //''position
+			clonelist[i].transform.position = new Vector3(0, 0, 10 + 10*i); //''position
 			clonelist [i].GetComponent<Master> ().thislong = clonelist[i]; //post object
 			clonelist [i].GetComponent<Master> ().move = a[i]; //initialize gene
 			//Debug.Log(clonelist [i].GetComponent<Master> ().move[0]);
@@ -58,6 +65,9 @@ public class Grandm : MonoBehaviour {
 
 			while(i < 100)
 			{
+				if (clonelist [i].GetComponent<Master> ().goode == 1) {
+					valuelist [i] = clonelist [i].GetComponent<Master> ().finalvalue;
+				}
 				a [i] = clonelist [i].GetComponent<Master> ().move; //store gene to a
 				i++;
 			}
@@ -72,7 +82,7 @@ public class Grandm : MonoBehaviour {
 			clonelist = new GameObject[100];
 			while (i < 100) {
 				clonelist [i] = (GameObject)Instantiate (mast); //make new object setting
-				clonelist[i].transform.position = new Vector3(6, 0, 10 + 10*i); //''position
+				clonelist[i].transform.position = new Vector3(0, 0, 10 + 10*i); //''position
 				clonelist [i].GetComponent<Master> ().thislong = clonelist[i];//post object
 				i++;
 			}

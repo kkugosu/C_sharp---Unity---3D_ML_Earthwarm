@@ -36,9 +36,6 @@ public class Grandm : MonoBehaviour {
 			//Debug.Log(a[j][i]); ok.
 			j++;
 		}
-
-
-
 		while(i < 100)
 		{
 			clonelist [i] = (GameObject)Instantiate (mast); // initialize objects
@@ -55,7 +52,7 @@ public class Grandm : MonoBehaviour {
 	void Update () {
 		i = 0;
 		times = times + Time.deltaTime;
-		if (times > 10) {
+		if (times > 20) {
 			times = 0;
 			pgeneration++;
 
@@ -87,8 +84,5 @@ public class Grandm : MonoBehaviour {
 			}
 			i = 0;
 		}
-
-
-
 	}
 }

@@ -15,10 +15,19 @@ public class Master : MonoBehaviour {
 	public Rigidbody r3;
 	public Rigidbody r4;
 	public Rigidbody r5;
+	public GameObject tempobj5;
+	public float temp5;
+	public GameObject tempobj4;
+	public float temp4;
+	public GameObject tempobj2;
+	public float temp2;
+	public GameObject tempobj1;
+	public float temp1;
 	public float times;
 	public int generation;
 	public int pos;
 	public int torque;
+	public float c5x;
 	// Use this for initialization
 	void Start () {
 		int i = 0;
@@ -28,11 +37,16 @@ public class Master : MonoBehaviour {
 			//Debug.Log("asdf ==== "+move [i]);
 			i++;
 		}
+
 		c1 = thislong.transform.Find ("Cylinder").gameObject;
 		c2 = thislong.transform.Find ("Cylinder2").gameObject;
 		c3 = thislong.transform.Find ("Cylinder3").gameObject;
 		c4 = thislong.transform.Find ("Cylinder4").gameObject;
 		c5 = thislong.transform.Find ("Cylinder5").gameObject; //get object and find child
+		tempobj5 = c5.transform.Find("Cube").gameObject;
+		tempobj4 = c4.transform.Find("Cube").gameObject;
+		tempobj2 = c2.transform.Find("Cube").gameObject;
+		tempobj1 = c1.transform.Find("Cube").gameObject;
 		r1 = c1.GetComponent<Rigidbody>();
 		r2 = c2.GetComponent<Rigidbody>();
 		r3 = c3.GetComponent<Rigidbody>();
@@ -51,8 +65,15 @@ public class Master : MonoBehaviour {
 			times = 0;
 			pos = 0;
 			generation++;
+			c5x = c5.GetComponent<Transform> ().position.x;
+			temp5 = tempobj5.GetComponent<Transform> ().position.x;
 		
 		}
+		if (generation == 1) {
+		
+		}
+		if (generation == 0) {
+
 		r1.AddTorque(torque*(move[pos + 0]*Vector3.right + 2*move[pos + 1]*Vector3.right + move[pos + 2]*Vector3.left + 2*move[pos + 3]*Vector3.left
 			+ move[pos + 4]*Vector3.up + 2* move[pos + 5]*Vector3.up + move[pos + 6]*Vector3.down + 2*move[pos + 7]*Vector3.down
 			+ move[pos + 8]*Vector3.forward + 2*move[pos + 9]*Vector3.forward + move[pos + 10]*Vector3.back + move[pos + 11]*Vector3.back));
@@ -82,6 +103,7 @@ public class Master : MonoBehaviour {
 			+ move[pos + 40]*Vector3.down + 2* move[pos + 41]*Vector3.down + move[pos + 42]*Vector3.up + 2*move[pos + 43]*Vector3.up
 			+ move[pos + 44]*Vector3.back + 2*move[pos + 45]*Vector3.back + move[pos + 46]*Vector3.forward + move[pos + 47]*Vector3.forward));
 		// child move
+		}
 		times = times + Time.deltaTime;
 		if (times > 0.5) {
 			times = 0;

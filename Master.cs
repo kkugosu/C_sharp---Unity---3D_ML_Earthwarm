@@ -128,8 +128,8 @@ public class Master : MonoBehaviour {
 				r3.AddTorque (300 * Vector3.down);
 				r2.AddTorque (300 * Vector3.up);
 			} //fix pos
-			finalvalue = tempobj5.GetComponent<Transform>().position.x - 6;
-			if (finalvalue > 1)
+			finalvalue = tempobj5.GetComponent<Transform>().position.x - 7;
+			if (finalvalue > 0)
 			{
 				goode = 1;
 			}
